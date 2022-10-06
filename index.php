@@ -1,3 +1,7 @@
 <?php
-	echo "Hello from VsCode";
+    include "header.php";
 ?>
+
+<div>
+    Welcome to the Home Page!
+</div>
