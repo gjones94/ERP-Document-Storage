@@ -11,6 +11,7 @@
 
 <!-- JQUERY -->
 <script src="support/assets/js/jquery-1.12.4.js"></script>
+<script src="support/assets/scripts/phpCallers.js"></script>
 <script src="support/assets/scripts/activeNavLink.js"></script>
 <script src="support/assets/js/bootstrap.min.js"></script> 
 <script src="support/assets/js/bootstrap-fileupload.js"></script>

@@ -66,7 +66,7 @@ function getAllFiles(){
 
     $result = $db->query($sql);
 
-    $files = $result->fetch_all(MYSQLI_ASSOC);
+    $files = $result->fetch_all(MYSQLI_ASSOC) or die("Error fetching files");
     
     return $files;
 
@@ -77,4 +77,23 @@ function getAllFiles(){
     } 
     */
 }
+
+function deleteFile($id){
+    $sql = "UPDATE `file` SET `file_status` = 'inactive' WHERE `auto_id` = ".$id.";";
+    $db = new Database();
+    $db->connect();
+    $db->query($sql) or die("Error deleting record");
+    return TRUE; 
+}
+
+function viewFile($user_id, $file_id){
+
+}
+
+
+/* SCRIPTS FOR POST CALLS TO THIS FILE */
+if (isset($_POST['DELETE']) && $_POST['DELETE'] == 'yes'){
+    deleteFile($_POST['id']);
+}
+
 ?>
