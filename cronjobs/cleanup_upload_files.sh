@@ -13,14 +13,14 @@ if [[ $num_files == 0 ]];then
     echo "No files to delete"
 else
     for file in $files; do
-        file=$path/$file
-        file_create=`date -r $file +%s`;
+        file_path=$path/$file
+        file_create=`date -r $file_path +%s`;
         date_now=`date +%s`;
         difference=$(( ($date_now - $file_create) / 60))
         if [[ $difference -gt 1 ]]; then
             echo "$file was created more than 5 minutes ago";
             echo "Deleting $file";
-            rm $file    
+            rm $file_path    
         else
             echo $file not old enough to delete
         fi
