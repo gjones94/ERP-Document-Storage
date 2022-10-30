@@ -57,14 +57,16 @@ function get_temp_link_to_file($id){
         fclose($fp);
     }
 
-    $link = UPLOADS . $temp_file_name;
-    echo $link;
+    $link = 'uploads/'.$temp_file_name;
 
     return $link;
 }
 
 function get_random_string($num_bytes = 30){
-    return base64_encode(openssl_random_pseudo_bytes($num_bytes));
+    $string = base64_encode(openssl_random_pseudo_bytes($num_bytes));
+    $string = str_replace("/", "", $string);
+    $string = str_replace("\\", "", $string);
+    return $string;
 }
 
 

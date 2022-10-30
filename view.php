@@ -4,6 +4,7 @@
 
     if(isset($_POST['fileId'])){
         $id = $_POST['fileId'];
-        get_temp_link_to_file($id);
+        $link = get_temp_link_to_file($id);
+        echo '<p>File: <a href="'.$link.'">'."Link".'</a></p>';
     }
 ?>
