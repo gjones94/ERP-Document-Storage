@@ -1,7 +1,7 @@
 function deleteFile(file_id){
     $.ajax({
         type: "POST",
-        url: 'support/fileSupport.php',
+        url: 'support/file_functions.php',
         data: {DELETE: "yes", id: file_id},
 
         success: function(){
@@ -15,10 +15,11 @@ function deleteFile(file_id){
     });
 }
 
+/*
 function viewFile(userId, fileId){
     $.ajax({
         type: "POST",
-        url: 'support/fileSupport.php',
+        url: 'support/TODO.php',
         data: { VIEW: "yes", user_id: userId, file_id, fileId },
         success: function(){
             location.reload();
@@ -28,3 +29,4 @@ function viewFile(userId, fileId){
         }
     })
 }
+*/

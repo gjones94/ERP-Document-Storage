@@ -4,6 +4,6 @@
         define('HOST', 'localhost');
         define('DATABASE', 'doc_storage');
         define('MAX_FILE_SIZE', '1000000');
-        define('UPLOADS', '/var/www/html/uploads/');
+        define('UPLOADS', '/var/www/html/doc_storage/uploads/');
 
 ?>

@@ -1,3 +1,0 @@
-If your display breaks:
-Need to remove this after ssh into the computer
-/home/trey/Documents/git/linux/start/startup.sh

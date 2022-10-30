@@ -1,0 +1,76 @@
+<?php
+
+include_once "Database.php";
+include_once "general_functions.php";
+include_once "definitions.php";
+
+function get_all_files(){
+    $sql = "SELECT `auto_id`, `name`, `owner`, `upload_date` FROM `file` WHERE `status` = 'active'";
+    $db = new Database();
+    $db->connect();
+
+    $result = $db->query($sql) or die("Error: Could not retrieve all files");
+
+    $files = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $files;
+}
+
+function get_searched_files($field, $searchString){
+    $sql = "SELECT `auto_id`, `name`, `owner`, `upload_date` FROM `file` WHERE `status` = 'active' and `$field` like '%$searchString%'";
+    $db = new Database();
+    $db->connect();
+    $result = $db->query($sql) or die("Error: Could not retrieve searched files");
+    $files = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $files;
+}
+
+function delete_file($id){
+    $sql = "UPDATE `file` SET `status` = 'inactive' WHERE `auto_id` = ".$id.";";
+    $db = new Database();
+    $db->connect();
+    $db->query($sql);
+    return TRUE; 
+}
+
+function get_temp_link_to_file($id){
+    $db = new Database();
+    $db->connect();
+    $sql = "SELECT `content` FROM `file` WHERE `auto_id` = $id";
+    $result = $db->query($sql);
+    $data = $result->fetch_array(MYSQLI_ASSOC); //should only get one row of data
+    $content = $data['content'];
+    $temp_file_name = get_random_string();
+    
+    $fp = fopen(UPLOADS . $temp_file_name, "w");
+
+    if(!$fp){
+        console("Temp file could not be created at this time");
+    }else{
+        $bytes_written = fwrite($fp, $content);
+
+        if(!$bytes_written){
+            console("Temp file could not be written to at this time");
+        }
+
+        fclose($fp);
+    }
+
+    $link = UPLOADS . $temp_file_name;
+    echo $link;
+
+    return $link;
+}
+
+function get_random_string($num_bytes = 30){
+    return base64_encode(openssl_random_pseudo_bytes($num_bytes));
+}
+
+
+/* SCRIPTS FOR POST CALLS TO THIS FILE FROM AJAX OR FORM*/
+if (isset($_POST['DELETE']) && $_POST['DELETE'] == 'yes'){
+    delete_file($_POST['id']);
+}
+
+?>

@@ -1,6 +1,7 @@
 <?php 
     include "partial/header.php";
-    include "support/fileSupport.php";
+    include "support/UploadFile.php";
+    include "support/general_functions.php";
 ?>
 
 <?php
@@ -49,8 +50,11 @@
                 <hr>
                 <div class="row">
                     <div class="p-0 col-md-2">
-                        <button class="py-2 btn btn-large btn-block btn-success" name="submit" type="submit" value="submit">
-                            Upload File
+                        <button class="py-2 btn btn-large btn-block btn-success" name="submit" type="submit" value="system">
+                            Upload File to File System
+                        </button>
+                        <button class="py-2 btn btn-large btn-block btn-success" name="submit" type="submit" value="db">
+                            Upload File to Database
                         </button>
                     </div>
                 </div>
@@ -63,12 +67,17 @@
 <?php
 if (isset($_POST['submit']))
 {
-	$fileOwner="user@test.mail"; //passed in when writing
-    $fileType="Sales Contract"; //given by user somehow
+    
+	$file_owner="user@test.mail"; //passed in when writing
+    $file_type="Sales Contract"; //given by user somehow
 
-    $file = new FileForUpload($_FILES['userfile'], $fileOwner, $fileType);
-    $file->upload();
+    $file = new UploadFile($_FILES['userfile'], $file_owner, $file_type);
+    if($_POST['submit'] == 'system'){
+        $file->upload_to_filesystem();
+    }elseif($_POST['submit'] == 'db'){
+        $file->upload_to_db();
+    }
 
-	header("Location: http://192.168.56.102/upload.php?msg=success");
+    redirect("upload.php?msg=success");
 }
 ?>
