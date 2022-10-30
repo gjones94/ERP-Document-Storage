@@ -17,12 +17,12 @@ else
         file_create=`date -r $file_path +%s`;
         date_now=`date +%s`;
         difference=$(( ($date_now - $file_create) / 60))
-        if [[ $difference -gt 1 ]]; then
+        if [[ $difference -gt 5 ]]; then
             echo "$file was created more than 5 minutes ago";
             echo "Deleting $file";
             rm $file_path    
         else
-            echo $file not old enough to delete
+            echo $file has not expired yet
         fi
     done
 fi
