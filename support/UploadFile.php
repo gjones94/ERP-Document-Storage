@@ -12,13 +12,13 @@ class UploadFile{
     private $path;
     private $type;
     private $doc_type;
+    private $ext;
 
     private $content;
     private $temp_name;
 
     function __construct($file, $owner, $doc_type)
     {
-        $this->name = $file['name'];
         $this->temp_name = $file['tmp_name'];
         $this->owner = $owner;
         $this->size = $file['size'];
@@ -26,6 +26,9 @@ class UploadFile{
         $this->path = UPLOADS;
         $this->type = $file['type'];
         $this->doc_type = $doc_type;
+
+        //separate file name and extension
+        $this->separate_file_name_and_extension($file['name']);
 
         //get content of file
         $this->content = $this->get_content();
@@ -45,7 +48,7 @@ class UploadFile{
        $db->connect();
        $this->upload_date = date("Y-m-d H:i:s");
 
-       $sql = "INSERT INTO `file` (`owner`,`name`,`size`,`upload_date`,`status`,`path`, `content`, `type`, `doc_type`) VALUES ('$this->owner','$this->name','$this->size','$this->upload_date', '$this->status', '$this->path', NULL, '$this->type', '$this->doc_type')";
+       $sql = "INSERT INTO `file` (`owner`,`name`,`size`,`upload_date`,`status`,`path`, `content`, `type`, `doc_type`, `ext`) VALUES ('$this->owner','$this->name','$this->size','$this->upload_date', '$this->status', '$this->path', NULL, '$this->type', '$this->doc_type', '$this->ext')";
        $db->query($sql);
     }
 
@@ -63,7 +66,7 @@ class UploadFile{
         $this->upload_date = date("Y-m-d H:i:s");
 
         $formatted_content = addslashes($this->content);
-        $sql = "INSERT INTO `file` (`owner`,`name`,`size`,`upload_date`,`status`,`path`,`content`,`type`,`doc_type`) VALUES ('$this->owner','$this->name','$this->size','$this->upload_date', '$this->status', NULL, '$formatted_content','$this->type', '$this->doc_type')";
+        $sql = "INSERT INTO `file` (`owner`,`name`,`size`,`upload_date`,`status`,`path`,`content`,`type`,`doc_type`, `ext`) VALUES ('$this->owner','$this->name','$this->size','$this->upload_date', '$this->status', NULL, '$formatted_content','$this->type', '$this->doc_type', '$this->ext')";
         $db->query($sql);
     }
 
@@ -74,6 +77,20 @@ class UploadFile{
         $content = fread($fp, filesize($this->temp_name));
         fclose($fp);
         return $content;
+    }
+
+    private function separate_file_name_and_extension($filename)
+    {
+        $pattern = '/^(\w+)(\.[a-zA-Z]{1,10}$)/';
+        if(preg_match($pattern, $filename, $matches))
+        {
+            $this->name = $matches[1];
+            $this->ext = $matches[2];
+        }
+        else
+        {
+            die("Incorrect filename given");
+        }
     }
 }
 

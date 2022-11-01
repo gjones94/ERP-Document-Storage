@@ -1,0 +1,21 @@
+I think the most helpful thing for me is hands-on work. So having a group project to put into practice what is taught is the most important thing to help me learn.
+And I've liked the textbook, it's a pretty easy read, but it's a lot of text to go through.
+
+The two most interesting things for me:
+
+1. At the beginning when we talked about the different kinds of metaphors for interactions, and how that helps users to relate every day life to interacting with a digital or mechanical interface.
+2. The user focus on behavior, personality, and tendencies that need to be taken into account when designing aspects of the interface. Everything boils down to communication, and it's a two-way street. Users communicate to the system with commands, clicks, speech, and the system prompts and displays options or responds in ways that the user can relate to easily.
+
+The two topics I would like to cover more
+
+1. I would find it interesting to research more real life stories of company products with interfaces that were complete fails and huge successes and be able to understand how this has impacted the company and its customers
+2. I would also like to do more around the topic of bleeding edge interfaces and what is new and upcoming specifically. Being able to get students excited about things that are new and might be possible.
+
+I like having the discussion boards to some extent, but maybe not every week. We could do them as an easier assignment every other week, with
+other assignments focusing on case studies and research about interfaces.
+
+I think it would also be helpful to have a couple small practical excercises of designing an actual interface. Theory is easily forgotten unless it's practiced.
+While we do have one assignment, it would be better to have a few small prototype examples to create and get people some experience before doing the whole project due
+at the end of semester and even if there's feedback on it, the semester is over, and most students won't open blackboard again to really look at the feedback or improve upon it.
+
+

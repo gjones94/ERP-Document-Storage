@@ -50,11 +50,13 @@
                 <hr>
                 <div class="row">
                     <div class="p-0 col-md-2">
+                        <!--
                         <button class="py-2 btn btn-large btn-block btn-success" name="submit" type="submit" value="system">
                             Upload File to File System
                         </button>
+                        -->
                         <button class="py-2 btn btn-large btn-block btn-success" name="submit" type="submit" value="db">
-                            Upload File to Database
+                            Upload File
                         </button>
                     </div>
                 </div>
@@ -68,14 +70,15 @@
 if (isset($_POST['submit']))
 {
     
-	$file_owner="user@test.mail"; //passed in when writing
-    $file_type="Sales Contract"; //given by user somehow
+    //Placeholders for now until we get user authentication as a class
+	$file_owner="user@test.mail"; 
+    $file_type="Sales Contract"; 
 
     $file = new UploadFile($_FILES['userfile'], $file_owner, $file_type);
     if($_POST['submit'] == 'system'){
-        $file->upload_to_filesystem();
+        $file->upload_to_filesystem(); //leaving here in case I decide to go with file system path
     }elseif($_POST['submit'] == 'db'){
-        $file->upload_to_db();
+        $file->upload_to_db(); // will only be using this one right now for blobs
     }
 
     redirect("upload.php?msg=success");

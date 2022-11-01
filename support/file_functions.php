@@ -37,11 +37,11 @@ function delete_file($id){
 function get_temp_link_to_file($id){
     $db = new Database();
     $db->connect();
-    $sql = "SELECT `content` FROM `file` WHERE `auto_id` = $id";
+    $sql = "SELECT `content`, `ext` FROM `file` WHERE `auto_id` = $id";
     $result = $db->query($sql);
     $data = $result->fetch_array(MYSQLI_ASSOC); //should only get one row of data
     $content = $data['content'];
-    $temp_file_name = get_random_string();
+    $temp_file_name = get_random_string() . $data['ext'];
     
     $fp = fopen(UPLOADS . $temp_file_name, "w");
 
