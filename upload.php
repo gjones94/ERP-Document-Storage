@@ -19,7 +19,7 @@
         <form method="post" enctype="multipart/form-data" action="upload.php">
             <?php
                 echo '<input type="hidden" name="uploadedby" value="user@test.mail">';
-                echo '<input type="hidden" name="MAX_FILE_SIZE" value="$MAX_FILE_SIZE">';
+                echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.MAX_FILE_SIZE.'">';
             ?>
             <div class="form-group">
 

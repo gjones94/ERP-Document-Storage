@@ -2,6 +2,12 @@
 include_once "Database.php";
 include_once "definitions.php";
 
+/*
+    Purpose:
+    Provides a wrapper class for file information that contains internal methods to
+    upload itself (with file content and metadata) to the database
+*/
+
 class UploadFile{
 
     private $owner;
