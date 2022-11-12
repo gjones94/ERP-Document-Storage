@@ -74,7 +74,7 @@
                                 $files = get_searched_files('name', $string);
                                 break;
                             case "uploadBy":
-                                $files = get_searched_files('owner', $string);
+                                $files = get_searched_files('account', $string);
                                 break;
                             case "uploadDate":
                                 $files = get_searched_files('upload_date', $string);
@@ -104,7 +104,7 @@
                             $file = $files[$i];
                             $file_id = $file['auto_id'];
                             $name = $file['name'];
-                            $owner = $file['owner'];
+                            $owner = $file['account'];
                             $date = $file['upload_date'];
                             echo "<tr scope='row'>";
                                 echo "<td class='d-flex flex-column align-items-center py-3'>";

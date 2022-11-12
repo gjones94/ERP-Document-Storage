@@ -5,7 +5,7 @@ include_once "general_functions.php";
 include_once "definitions.php";
 
 function get_all_files(){
-    $sql = "SELECT `auto_id`, `name`, `owner`, `upload_date` FROM `file` WHERE `status` = 'active'";
+    $sql = "SELECT `auto_id`, `name`, `account`, `upload_date` FROM `file` WHERE `status` = 'active'";
     $db = new Database();
     $db->connect();
 
@@ -17,7 +17,7 @@ function get_all_files(){
 }
 
 function get_searched_files($field, $searchString){
-    $sql = "SELECT `auto_id`, `name`, `owner`, `upload_date` FROM `file` WHERE `status` = 'active' and `$field` like '%$searchString%'";
+    $sql = "SELECT `auto_id`, `name`, `account`, `upload_date` FROM `file` WHERE `status` = 'active' and `$field` like '%$searchString%'";
     $db = new Database();
     $db->connect();
     $result = $db->query($sql) or die("Error: Could not retrieve searched files");
@@ -69,6 +69,14 @@ function get_random_string($num_bytes = 30){
     return $string;
 }
 
+function write_to_file($path, $text)
+{
+    $fp = fopen($path, "a");
+    $num = fwrite($fp, $text);
+    $success = ($num == strlen($text));
+    fclose($fp);
+    return $success;
+}
 
 /* SCRIPTS FOR POST CALLS TO THIS FILE FROM AJAX OR FORM*/
 if (isset($_POST['DELETE']) && $_POST['DELETE'] == 'yes'){

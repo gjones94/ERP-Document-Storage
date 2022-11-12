@@ -1,0 +1,32 @@
+credentials:
+------------------
+
+$uid = "lvs888";
+$password = "8Yy3mKCWkb6P$BMd";
+
+
+results:
+------------------
+status: [OK/ERROR]
+MSG:
+ACTION:
+------------------
+
+https://cs4743.professorvaladez.com/api/[endpoint]
+
+[endpoints]
+1. create_session
+
+    https://cs4743.professorvaladez.com/api/create_session?username=$uid&password=$password
+
+2. query_files
+
+    https://cs4743.professorvaladez.com/api/query_files?sid=$sid&uid=$uid
+
+3. request_file
+    
+    https://cs4743.professorvaladez.com/api/request_file?sid=$sid&uid=$uid&fid=$fid
+
+4. close_session
+
+    https://cs4743.professorvaladez.com/api/close_session?sid=$sid

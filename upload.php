@@ -10,6 +10,12 @@
             echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>';
         echo 'Document successfully uploaded!';
         echo '</div>';
+    }else if(isset($_REQUEST['msg']) && $_REQUEST['msg'] == "error")
+    {
+        echo '<div class="alert alert-danger alert-dismissable">';
+            echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>';
+        echo 'Document did not upload successfully';
+        echo '</div>';
     }
 ?>
 <div class="page-inner">
@@ -70,17 +76,14 @@
 if (isset($_POST['submit']))
 {
     
-    //Placeholders for now until we get user authentication as a class
-	$file_owner="user@test.mail"; 
-    $file_type="Sales Contract"; 
-
-    $file = new UploadFile($_FILES['userfile'], $file_owner, $file_type);
-    if($_POST['submit'] == 'system'){
-        $file->upload_to_filesystem(); //leaving here in case I decide to go with file system path
-    }elseif($_POST['submit'] == 'db'){
-        $file->upload_to_db(); // will only be using this one right now for blobs
+    $file = new UploadFile($_FILES['userfile']);
+    if($_POST['submit'] == 'db'){
+        if($file->upload_to_db()){
+            redirect("upload.php?msg=success");
+        }else{
+            redirect("upload.php?msg=error");
+        }
     }
 
-    redirect("upload.php?msg=success");
 }
 ?>
