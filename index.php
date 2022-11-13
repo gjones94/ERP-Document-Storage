@@ -1,6 +1,6 @@
 <?php
-    include "partial/header.php";
-    include_once "support/UploadFile.php";
+    include_once "partial/header.php";
+    include_once "models/WebFile.php";
     include_once "support/general_functions.php";
     include_once "support/file_functions.php";
 ?>
@@ -35,8 +35,8 @@
 </form>
 
 <div class="row p-0 m-0">
-    <div>
-        <table class="table-bordered table-dark">
+    <div style="height: 500px; overflow-y: auto;">
+        <table class="table-bordered table-responsive table-dark">
             <thead class="thead-dark">
                 <tr class="text-center" scope="row">
                     <th class="h3" colspan="5">

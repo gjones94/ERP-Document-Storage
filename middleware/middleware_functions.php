@@ -1,5 +1,5 @@
 <?php
-    include_once "../support/Database.php"; 
+    include_once "../models/Database.php"; 
     include_once ".credentials.php";
     include_once "../support/general_functions.php";
 
@@ -43,6 +43,7 @@
 
     function print_response($cinfo)
     {
+        echo "\n";
         echo $cinfo[0];
         echo "\n";
         echo $cinfo[1];
@@ -96,17 +97,17 @@
         return $success;
     }
 
-    function get_response_formatted($api_type, $response)
+    function get_response_formatted($api_type, $response, $date)
     {
         $line = "=============================";
         $sub_line = "-----------------------------";
-        $header = $line . "\n" . "API_TYPE: " . $api_type . "\n" . $sub_line . "\n" . "Response" . "\n" . $sub_line . "\n";
+        $header = $line . "\n" . "API_TYPE: " . $api_type . "\nDate: $date" . "\n" . $sub_line . "\n" . "Response" . "\n" . $sub_line . "\n";
         $body = $response[0] . "\n" . $response[1] . "\n" . $response[2] . "\n";
         $footer = $line ."\n\n\n\n";
         return $header . $body . $footer;
     }
 
-    function add_session($uid, $sid)
+    function log_session_created($uid, $sid)
     {
         /* Adds session to database and records the time it was created*/
         $db = new Database();
@@ -118,7 +119,7 @@
         return $success;
     }
 
-    function close_session($sid)
+    function log_session_closed($sid)
     {
         $db = new Database();
         $db->connect();
@@ -129,8 +130,4 @@
         return $success;
     }
 
-    function add_file($file)
-    {
-
-    }
 ?>

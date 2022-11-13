@@ -1,6 +1,6 @@
 <?php
 
-include_once "Database.php";
+include_once "../models/Database.php";
 include_once "general_functions.php";
 include_once "definitions.php";
 
@@ -62,7 +62,8 @@ function get_temp_link_to_file($id){
     return $link;
 }
 
-function get_random_string($num_bytes = 30){
+function get_random_string($num_bytes = 30)
+{
     $string = base64_encode(openssl_random_pseudo_bytes($num_bytes));
     $string = str_replace("/", "", $string);
     $string = str_replace("\\", "", $string);
@@ -78,8 +79,19 @@ function write_to_file($path, $text)
     return $success;
 }
 
+function file_already_exists($file_name)
+{
+    $db = new Database();
+    $db->connect();
+    $query = "SELECT `auto_id` FROM `file` WHERE `name` = '$file_name' and `status` = 'active'";
+    $result = $db->query($query);
+    $file = $result->fetch_all(MYSQLI_ASSOC);
+    return ($file != NULL);
+}
+
 /* SCRIPTS FOR POST CALLS TO THIS FILE FROM AJAX OR FORM*/
-if (isset($_POST['DELETE']) && $_POST['DELETE'] == 'yes'){
+if (isset($_POST['DELETE']) && $_POST['DELETE'] == 'yes')
+{
     delete_file($_POST['id']);
 }
 

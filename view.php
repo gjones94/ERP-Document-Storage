@@ -1,5 +1,5 @@
 <?php
-    include_once "support/Database.php";
+    include_once "models/Database.php";
     include_once "support/file_functions.php";
 
     if(isset($_POST['fileId'])){

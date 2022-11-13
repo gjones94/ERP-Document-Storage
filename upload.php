@@ -1,7 +1,7 @@
 <?php 
-    include "partial/header.php";
-    include "support/UploadFile.php";
-    include "support/general_functions.php";
+    include_once "partial/header.php";
+    include_once "models/WebFile.php";
+    include_once "support/general_functions.php";
 ?>
 
 <?php
@@ -76,7 +76,7 @@
 if (isset($_POST['submit']))
 {
     
-    $file = new UploadFile($_FILES['userfile']);
+    $file = new WebFile($_FILES['userfile']);
     if($_POST['submit'] == 'db'){
         if($file->upload_to_db()){
             redirect("upload.php?msg=success");

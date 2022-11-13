@@ -1,6 +1,5 @@
 <?php
-    include 'definitions.php';
-    mysqli_report(MYSQLI_REPORT_OFF);
+    include_once '../support/definitions.php';
 
     class Database{
         private $connection;
@@ -16,7 +15,11 @@
         }
 
         function query($query){
-            $result = $this->connection->query($query) or die("Error in query\n" . $this->connection->error . "\n");
+            $result = $this->connection->query($query);
+            if(!$result) 
+            {
+                echo $this->connection->error . "\n";
+            }
 
             return $result;
         }
