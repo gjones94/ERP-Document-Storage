@@ -102,7 +102,11 @@
         $line = "=============================";
         $sub_line = "-----------------------------";
         $header = $line . "\n" . "API_TYPE: " . $api_type . "\nDate: $date" . "\n" . $sub_line . "\n" . "Response" . "\n" . $sub_line . "\n";
-        $body = $response[0] . "\n" . $response[1] . "\n" . $response[2] . "\n";
+        $body = "";
+        foreach($response as $element)
+        {
+            $body = $body . $element . "\n";
+        }
         $footer = $line ."\n\n\n\n";
         return $header . $body . $footer;
     }

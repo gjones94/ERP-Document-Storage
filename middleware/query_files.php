@@ -51,6 +51,7 @@
             {
                 $files = explode(",", $msg);
 
+                echo "\nFiles to upload: " . count($files) . "\n";
                 foreach($files as $key=>$value)
                 {
                     echo $value . "\r\n";

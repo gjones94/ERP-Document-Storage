@@ -41,7 +41,7 @@ function get_temp_link_to_file($id){
     $result = $db->query($sql);
     $data = $result->fetch_array(MYSQLI_ASSOC); //should only get one row of data
     $content = $data['content'];
-    $temp_file_name = get_random_string() . $data['ext'];
+    $temp_file_name = get_random_string() . "." . $data['ext'];
     
     $fp = fopen(UPLOADS . $temp_file_name, "w");
 

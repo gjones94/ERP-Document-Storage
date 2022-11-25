@@ -3,19 +3,22 @@
     include_once "Database.php";
     include_once "../support/file_functions.php";
     include_once "../support/general_functions.php";
+    include_once "../middleware/middleware_functions.php";
 
     class API_File
     {
-        private $account;
         public $file_name;
         private $size;
         private $upload_date; 
-        private $create_date; 
         private $status; 
-        private $type; 
         private $doc_type;
         private $ext; 
         private $content;
+
+        //obtained from name (could be missing one of these)
+        private $account = "N/A";
+        private $create_date = NULL;
+        private $type = "N/A"; 
 
         //other metadata we need to have access to for logging
         private $error;
@@ -34,14 +37,35 @@
 
         function get_data_from_filename()
         {
-            $this->ext = explode(".", $this->file_name)[1]; 
+            $this->ext = explode(".", $this->file_name)[1];
+            $data_array = explode(".", $this->file_name)[0]; //get rid of the extension
+            $data_array = explode("-", $data_array); //separate each element
 
-            $data_array = explode("-", $this->file_name);
-            $this->account = $data_array[0];
-            $this->type = $data_array[1];
+            foreach($data_array as $element)
+            {
+                $this->set_tag($element);
+            }
+        }
 
-            $unformatted_date = explode(".", $data_array[2])[0]; //get date text without the extension attached
-            $this->create_date = $this->parse_date($unformatted_date);
+        function set_tag ($data)
+        {
+            $reg_account = "/^[0-9]{8}$/";
+            if(preg_match($reg_account, $data, $matches))
+            {
+                $this->account = $matches[0];
+            }
+    
+            $reg_type = "/[a-zA-Z]+/";
+            if(preg_match($reg_type, $data, $matches))
+            {
+                $this->type = $matches[0];
+            }
+    
+            $reg_date = "/[0-9]{8}_[0-9]{2}_[0-9]{2}_[0-9]{2}/";
+            if(preg_match($reg_date, $data, $matches))
+            {
+                $this->create_date = $this->parse_date($matches[0]);
+            }
         }
 
         function parse_date($unformatted_date)
@@ -103,6 +127,12 @@
 
             $formatted_content = addslashes($this->content);
             $sql = "INSERT INTO `file` (`account`, `name`, `size`, `upload_date`, `create_date`, `status`, `content`, `type`, `doc_type`, `ext`) VALUES ('$this->account', '$this->file_name', '$this->size', '$this->upload_date', '$this->create_date', '$this->status', '$formatted_content','$this->type', '$this->doc_type', '$this->ext')";
+
+            if($this->create_date == NULL)
+            {
+                $sql = "INSERT INTO `file` (`account`, `name`, `size`, `upload_date`, `status`, `content`, `type`, `doc_type`, `ext`) VALUES ('$this->account', '$this->file_name', '$this->size', '$this->upload_date', '$this->status', '$formatted_content','$this->type', '$this->doc_type', '$this->ext')";
+            }
+
             $success = $db->query($sql);
             
             if($success == false)

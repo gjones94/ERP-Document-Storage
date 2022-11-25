@@ -3,6 +3,7 @@
     include_once "middleware_functions.php";
     include_once "../support/file_functions.php";
     include_once "../support/general_functions.php";
+    include_once "close_session.php";
 
     function create_session(&$uid, &$sid)
     {
@@ -17,7 +18,7 @@
             $session_record = get_open_session();
             $sid = $session_record['sid'];
             session_logging($sid, $api_type, $data, "INTERNAL_ERROR", "Open session already exists", "Please close existing session", "0.0");
-            die("Internal Error: Open session already exists, errors logged to database\n");
+            close_session($uid, $sid);
         }
 
         $ch = get_curl_for_api($api_type, $data);

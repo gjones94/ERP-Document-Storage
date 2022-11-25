@@ -1,5 +1,5 @@
 <?php
-    include_once '../support/definitions.php';
+    include_once '/var/www/html/doc_storage/support/definitions.php';
 
     class Database{
         private $connection;

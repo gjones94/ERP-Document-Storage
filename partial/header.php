@@ -8,4 +8,7 @@
     <li id="nav-upload" class="nav-item">
         <a class="nav-link" href="upload.php"> Upload </a>
     </li>
+    <li>
+        <a class="nav-link" href="report.php"> Reports </a>
+    </li>
 </ul>

@@ -28,16 +28,44 @@ class WebFile{
     {
         $this->file_name = $file['name'];
         $this->temp_name = $file['tmp_name'];
-        $this->size = $file['size'];
         $this->status = 'active';
+        $this->size = $file['size'];
         $this->doc_type = $file['type'];
+
         $this->ext = explode(".", $file['name'])[1];
         $this->content = $this->get_content();
-        
 
         $this->create_date = date("Y-m-d H:i:s"); //parse this from file name
         $this->type = "Legal"; //parse this from filetype
         $this->account = "71640293"; //Parse this from filename
+    }
+
+    function get_data_from_filename()
+    {
+        $this->ext = explode(".", $this->file_name)[1]; 
+
+        $data_array = explode("-", $this->file_name);
+        $this->account = $data_array[0];
+        $this->type = $data_array[1];
+
+        $unformatted_date = explode(".", $data_array[2])[0]; //get date text without the extension attached
+        $this->create_date = $this->parse_date($unformatted_date);
+    }
+
+    function parse_date($unformatted_date)
+    {
+        $date_data = explode("_", $unformatted_date);
+        $date = $date_data[0];
+
+        $time = $date_data[1] . ":" . $date_data[2] . ":" . $date_data[3];
+
+        $pattern = '/^(\d{4})(\d{2})(\d{2})$/';
+
+        if(preg_match($pattern, $date, $matches))
+        {
+            $date = $matches[1] . "-" . $matches[2] . "-" . $matches[3];
+        }
+        return $date . " " . $time;
     }
 
     //Function for uploading file and content to db without path

@@ -6,6 +6,8 @@
 
     function request_files($files, $sid = NULL, $uid = NULL)
     {
+        $log_file = "/home/ubuntu/logs/api_request_log.txt";
+
         $expected_file_count = count($files);
         $uploaded_file_count = 0;
         $api_type = "request";
@@ -64,16 +66,22 @@
         {
             $status = "Verify: OK";
             $action = "None";
+            $response = get_response_formatted("Retrieved files", $files, get_date());
             $success = true;
         }else{
             $status = "Verify: ERROR";
             $missing_files_to_string = implode(",", $missing_files);
             $action = "Upload the following: " . $missing_files_to_string; 
+            $response = get_response_formatted("Missing files", $missing_files, get_date());
             $success = false;
         }
 
         $msg = "Uploaded $uploaded_file_count out of $expected_file_count";
         session_logging("N/A", $api_type, "N/A", $status, $msg, $action, "0.00");
+
+        //Log to system
+        write_to_file($log_file, $response);
+
         return $success;
     }
 ?>

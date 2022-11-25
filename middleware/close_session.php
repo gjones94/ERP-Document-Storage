@@ -54,4 +54,5 @@
         $response = get_response_formatted($api_type, $cinfo, get_date());
         write_to_file($log_file, $response);
     }
+
 ?>
