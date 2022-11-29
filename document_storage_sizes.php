@@ -3,6 +3,7 @@
 
     $db = new Database();
     $db->connect();
+    echo "<div class='h1 text-center'>Loan Storage Report</div>";
     $query = "SELECT SUM(`size`) AS 'sum' FROM `file` WHERE `status` = 'active'";
     $result = $db->query($query);
     $data = $result->fetch_assoc();
