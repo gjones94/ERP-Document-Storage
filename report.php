@@ -4,27 +4,27 @@
 
 
 <form method="post" enctype="multipart/form-data" action="report.php">
-    <div class="row">
+    <div style="border-color: silver; border-style: solid; border-width: 2px; background-color: #111;" class="row mb-3 py-5">
         <div class="col-3 text-center">
-            <button class="btn btn-primary" name="unique" type="submit" value="unique_loan_numbers">
+            <button class="btn btn-primary p-4" name="unique" type="submit" value="unique_loan_numbers">
                 Unique Loan Number Report
             </button>
         </div>
 
         <div class="col-3 text-center">
-            <button class="btn btn-primary" name="size" type="submit" value="doc_size_averages">
+            <button class="btn btn-primary p-4" name="size" type="submit" value="doc_size_averages">
                 Total Storage Size Report
             </button>
         </div>
 
         <div class="col-3 text-center">
-            <button class ="btn btn-primary" name="detail" type="submit" value="loan_counts">
+            <button class ="btn btn-primary p-4" name="detail" type="submit" value="loan_counts">
                 Loan Counts
             </button>
         </div>
 
         <div class="col-3 text-center">
-            <button class="btn btn-primary" name="missing" type="submit" value="loan_details">
+            <button class="btn btn-primary p-4" name="missing" type="submit" value="loan_details">
                 Missing Loans
             </button>
         </div>
