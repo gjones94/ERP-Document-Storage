@@ -112,7 +112,7 @@
                     echo "<thead class='thead-dark'>";
                         echo "<tr class='text-center px-5'scope='row'>";
                             echo "<th class='h3 px-5' style=' background-color: rgb(30,30,30);' colspan='2'>";
-                                echo "No loans have all for documents";
+                                echo "No loans have all documents";
                             echo "</th>";
                         echo "</tr>";
                     echo "</thead";

@@ -20,6 +20,12 @@
             case "request":
                 $ch = curl_init("https://cs4743.professorvaladez.com/api/request_file");
                 break;
+            case "request_loans":
+                $ch = curl_init("https://cs4743.professorvaladez.com/api/request_loans");
+                break;
+            case "request_file_by_loan":
+                $ch = curl_init("https://cs4743.professorvaladez.com/api/request_file_by_loan");
+                break;
             default:
                 return null;
         }
